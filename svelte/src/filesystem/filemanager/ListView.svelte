@@ -13,59 +13,58 @@ export let hide_branding = false
 </script>
 
 <div class="directory">
-	<tr>
-		<td></td>
-		<td>Name</td>
-		<td>Size</td>
-		<td></td>
-	</tr>
-	{#each $nav.children as child, index (child.path)}
-		<a
-			href={"/d"+fs_encode_path(child.path)}
-			on:click|preventDefault={() => dispatch("node_click", index)}
-			on:contextmenu={e => dispatch("node_context", {event: e, index: index})}
-			class="node"
-			class:node_selected={child.fm_selected}
-			class:hidden={child.name.startsWith(".") && !show_hidden}
-		>
-			<td>
-				<img src={fs_node_icon(child, 64, 64)} class="node_icon" class:large_icons alt="icon"/>
-			</td>
-			<td class="node_name">
-				{child.name}
-			</td>
-			<td class="node_size">
-				{#if child.type === "file"}
-					{formatDataVolume(child.file_size, 3)}
-				{/if}
-			</td>
-			<td class="node_icons">
-				<div class="icons_wrap">
-					{#if child.abuse_type !== undefined}
-						<i class="icon" title="This file / directory has received an abuse report. It cannot be shared">block</i>
-					{:else if child.id}
-						<a
-							href="/d/{child.id}"
-							on:click|preventDefault|stopPropagation={() => {dispatch("node_share_click", index)}}
-							class="button action_button"
-						>
-							<i class="icon" title="This file / directory is shared. Click to open public link">share</i>
-						</a>
-					{/if}
-					{#if child.properties && child.properties.branding_enabled && !hide_branding}
-						<button class="action_button" on:click|preventDefault|stopPropagation={() => dispatch("node_branding", index)}>
-							<i class="icon">palette</i>
-						</button>
-					{/if}
-					{#if $nav.permissions.write && !hide_edit}
-						<button class="action_button" on:click|preventDefault|stopPropagation={() => dispatch("node_settings", index)}>
-							<i class="icon">edit</i>
-						</button>
-					{/if}
-				</div>
-			</td>
-		</a>
-	{/each}
+    <table>
+        <thead>
+            <tr>
+                <td></td>
+                <td>Name</td>
+                <td>Size</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {#each $nav.children as child, index (child.path)}
+                <tr>
+                    <td>
+                        <img src={fs_node_icon(child, 64, 64)} class="node_icon" class:large_icons alt="icon"/>
+                    </td>
+                    <td class="node_name">
+                        {child.name}
+                    </td>
+                    <td class="node_size">
+                        {#if child.type === "file"}
+                            {formatDataVolume(child.file_size, 3)}
+                        {/if}
+                    </td>
+                    <td class="node_icons">
+                        <div class="icons_wrap">
+                            {#if child.abuse_type !== undefined}
+                                <i class="icon" title="This file / directory has received an abuse report. It cannot be shared">block</i>
+                            {:else if child.id}
+                                <a
+                                    href="/d/{child.id}"
+                                    on:click|preventDefault|stopPropagation={() => {dispatch("node_share_click", index)}}
+                                    class="button action_button"
+                                >
+                                    <i class="icon" title="This file / directory is shared. Click to open public link">share</i>
+                                </a>
+                            {/if}
+                            {#if child.properties && child.properties.branding_enabled && !hide_branding}
+                                <button class="action_button" on:click|preventDefault|stopPropagation={() => dispatch("node_branding", index)}>
+                                    <i class="icon">palette</i>
+                                </button>
+                            {/if}
+                            {#if $nav.permissions.write && !hide_edit}
+                                <button class="action_button" on:click|preventDefault|stopPropagation={() => dispatch("node_settings", index)}>
+                                    <i class="icon">edit</i>
+                                </button>
+                            {/if}
+                        </div>
+                    </td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>
 </div>
 
 <style>
