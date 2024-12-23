@@ -15,7 +15,7 @@ jobs:
 
       - name: Install Deps
         run: |
-          npm install --save-dev rollup svelte rollup-plugin-svelte @rollup/plugin-node-resolve @rollup/plugin-commonjs rollup-plugin-livereload @rollup/plugin-terser @rollup/plugin-babel @rollup/plugin-typescript svelte-preprocess
+          npm install --save-dev rollup tslib svelte rollup-plugin-svelte @rollup/plugin-node-resolve @rollup/plugin-commonjs rollup-plugin-livereload @rollup/plugin-terser @rollup/plugin-babel @rollup/plugin-typescript svelte-preprocess
       
       - name: Build
         run: |
