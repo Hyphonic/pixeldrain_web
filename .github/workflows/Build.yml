@@ -10,10 +10,8 @@ jobs:
     steps:
       - name: Checkout Repo
       - uses: actions/checkout@v4
-
-      - name: List files
-        run: |
-          ls
+        with:
+          fetch-depth: 0
       
       - name: Build
         run: |
