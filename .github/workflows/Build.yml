@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Setup repo
         run: |
-          make run
+          make backgroundsvelte
