@@ -24,3 +24,4 @@ jobs:
       - name: List Files
         run: |
           ls
+          npm run dev
