@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Setup repo
         run: |
-          make backgroundsvelte
+          cd svelte && npm run build
