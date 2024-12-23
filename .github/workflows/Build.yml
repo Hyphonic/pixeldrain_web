@@ -1,0 +1,15 @@
+name: Build
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        run: |
+          go run main.go
+          make run
