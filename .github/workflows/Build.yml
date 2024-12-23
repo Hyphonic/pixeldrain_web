@@ -11,5 +11,4 @@ jobs:
     steps:
       - name: Setup repo
         run: |
-          go run main.go
           make run
