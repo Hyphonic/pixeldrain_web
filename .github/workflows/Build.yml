@@ -21,7 +21,7 @@ jobs:
         run: |
           cd svelte && npm run build
 
-      - name: List Files
-        run: |
-          ls
-          npm run
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5.0.0
+        with:
+          static_site_generator: sveltekit
