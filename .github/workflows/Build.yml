@@ -16,7 +16,7 @@ jobs:
       - name: Install Deps
         run: |
           npm install --global rollup
-          npm install --save-dev svelte rollup-plugin-svelte
+          npm install --save-dev svelte rollup-plugin-svelte @rollup/plugin-node-resolve
       
       - name: Build
         run: |
