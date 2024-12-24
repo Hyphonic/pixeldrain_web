@@ -38,7 +38,7 @@ jobs:
  
       - name: Build
         run: |
-          tree
+          tree --filelimit=20
           go run main.go
           cd svelte && npm run build
           
