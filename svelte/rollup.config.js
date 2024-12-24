@@ -6,7 +6,7 @@ import terser from '@rollup/plugin-terser';
 import babel from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import { sveltePreprocess } from 'svelte-preprocess';
-import html from '@rollup/plugin-html'; // Use the default export
+import * as html from '@rollup/plugin-html';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -61,9 +61,25 @@ export default [
 
 		// Add the HTML plugin to generate index.html files
 		html({
-			title: `${name}`, // Use the name as the title of the page
-			fileName: `${name}.html`, // Name the HTML file
-			publicPath: `${builddir}`, // Set the public path for scripts
+			title: `${name} - PixelDrain`, // Use a more descriptive title
+			template: ({ attributes, files, publicPath, title }) => {
+				// Generate a basic HTML template with the bundled JS
+				return `
+					<!DOCTYPE html>
+					<html lang="en">
+					<head>
+						<meta charset="UTF-8">
+						<title>${title}</title>
+					</head>
+					<body>
+						<div id="app"></div>
+						<script src="${files.js[0].fileName}"></script> <!-- Adjust to point to your JS bundle -->
+					</body>
+					</html>
+				`;
+			},
+			fileName: `${builddir}/${name}.html`, // Ensure the HTML files are written to the correct location
+			publicPath: './', // This should point to the root of the server
 		}),
 	],
 	watch: {
