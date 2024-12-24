@@ -15,14 +15,13 @@ jobs:
 
       - name: Install Deps
         run: |
-          npm install
           npm install --save-dev vite rollup tslib svelte @babel/preset-env rollup-plugin-svelte @rollup/plugin-node-resolve @rollup/plugin-commonjs rollup-plugin-livereload @rollup/plugin-terser @rollup/plugin-babel @rollup/plugin-typescript svelte-preprocess
-          npm run build --if-present
-          npm run test --if-present
  
       - name: Build
         run: |
           cd svelte && npm run build
+          cd ..
+          ls
           tree
 
       - name: Configure GitHub Pages
