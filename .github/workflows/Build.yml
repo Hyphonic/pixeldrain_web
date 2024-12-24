@@ -13,16 +13,20 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.4
+
       - name: Install Deps
         run: |
           npm install --save-dev vite rollup tslib svelte @babel/preset-env rollup-plugin-svelte @rollup/plugin-node-resolve @rollup/plugin-commonjs rollup-plugin-livereload @rollup/plugin-terser @rollup/plugin-babel @rollup/plugin-typescript svelte-preprocess
  
       - name: Build
         run: |
+          go run main.go
           cd svelte && npm run build
-          cd ..
-          ls
-          tree
+          
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5.0.0
