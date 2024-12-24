@@ -20,6 +20,7 @@ jobs:
       - name: Build
         run: |
           cd svelte && npm run build
+          tree
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5.0.0
