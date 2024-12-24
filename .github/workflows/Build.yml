@@ -42,7 +42,7 @@ jobs:
           go mod download fornaxian.tech/util
           go run main.go
           cd svelte && npm run build
-          tree --filelimit 20
+          ls -lh
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
