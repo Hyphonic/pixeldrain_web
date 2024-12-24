@@ -6,7 +6,7 @@ import terser from '@rollup/plugin-terser';
 import babel from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import { sveltePreprocess } from 'svelte-preprocess';
-import { html } from '@rollup/plugin-html'; // Import the HTML plugin
+import html from '@rollup/plugin-html'; // Use the default export
 
 const production = !process.env.ROLLUP_WATCH;
 
