@@ -47,13 +47,17 @@ jobs:
         run: |
           tree
 
+      - name: Upload all files as artifact
+        uses: actions/upload-artifact@v4.5.0
+        with:
+          name: Website
+          path: ./*
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./dist
 
       - name: Configure Pages
         uses: actions/configure-pages@v5.0.0
-        with:
-          static_site_generator: sveltekit
