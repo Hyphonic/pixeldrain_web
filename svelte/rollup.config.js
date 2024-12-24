@@ -3,13 +3,14 @@ import resolve, { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import terser from '@rollup/plugin-terser';
-import babel from '@rollup/plugin-babel'
-import typescript from '@rollup/plugin-typescript'
+import babel from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 import { sveltePreprocess } from 'svelte-preprocess';
+import { html } from '@rollup/plugin-html'; // Import the HTML plugin
 
 const production = !process.env.ROLLUP_WATCH;
 
-const builddir = "../res/static/svelte"
+const builddir = "../res/static/svelte";
 export default [
 	"file_viewer",
 	"filesystem",
@@ -30,25 +31,17 @@ export default [
 	},
 	plugins: [
 		sveltePreprocess(),
-
 		svelte({
 			preprocess: sveltePreprocess(),
 			compilerOptions: {
-				// enable run-time checks when not in production
 				dev: !production,
 			},
 			emitCss: false,
 		}),
-
 		babel({
 			extensions: [".js", ".ts", ".svelte"],
 			babelHelpers: "bundled",
 		}),
-
-		// If you have external dependencies installed from npm, you'll most
-		// likely need these plugins. In some cases you'll need additional
-		// configuration - consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
 		resolve({
 			browser: true,
 			exportConditions: ['svelte'],
@@ -60,19 +53,20 @@ export default [
 			compilerOptions: { lib: ["es2015", "dom"] },
 			verbatimModuleSyntax: true,
 		}),
-
-		// Watch the `public` directory and refresh the browser on changes when
-		// not in production
 		!production && livereload({
 			watch: `${builddir}/${name}.*`,
 			port: 5000 + index,
 		}),
-
-		// If we're building for production (npm run build instead of npm run
-		// dev), minify
 		production && terser(),
+
+		// Add the HTML plugin to generate index.html files
+		html({
+			title: `${name}`, // Use the name as the title of the page
+			fileName: `${name}.html`, // Name the HTML file
+			publicPath: `${builddir}`, // Set the public path for scripts
+		}),
 	],
 	watch: {
-		clearScreen: false
+		clearScreen: false,
 	},
 }));
