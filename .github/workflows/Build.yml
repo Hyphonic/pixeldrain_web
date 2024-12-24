@@ -41,7 +41,7 @@ jobs:
           go get fornaxian.tech/pixeldrain_web/webcontroller
           go mod download fornaxian.tech/util
           go run main.go
-          cd svelte && npm run build
+          cd svelte && npm run build && npm run dev
 
       - name: Tree
         run: |
