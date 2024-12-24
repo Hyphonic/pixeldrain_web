@@ -36,6 +36,7 @@ jobs:
  
       - name: Build
         run: |
+          tree
           go run main.go
           cd svelte && npm run build
           
