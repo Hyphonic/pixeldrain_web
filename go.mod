@@ -4,11 +4,6 @@ go 1.22
 
 toolchain go1.22.4
 
-replace (
-	fornaxian.tech/pixeldrain_api_client => ../pixeldrain_api_client
-	fornaxian.tech/util => ../util
-)
-
 require (
 	fornaxian.tech/config v0.0.0-20211108212237-6133aed90586
 	fornaxian.tech/log v0.0.0-20211102185326-552e9b1f8640
