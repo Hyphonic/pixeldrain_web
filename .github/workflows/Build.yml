@@ -31,6 +31,7 @@ jobs:
           echo Building
           cd svelte && npm run build
           echo Running Main.go Again
+          cd ..
           go run main.go
 
       - name: Upload all files as artifact
