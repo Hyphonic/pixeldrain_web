@@ -27,7 +27,7 @@ jobs:
           go get fornaxian.tech/pixeldrain_web/webcontroller
           go mod download fornaxian.tech/util
           go run main.go
-          cd svelte && npm run build && npm run dev
+          cd svelte && npm run build
 
       - name: Upload all files as artifact
         uses: actions/upload-artifact@v4.5.0
