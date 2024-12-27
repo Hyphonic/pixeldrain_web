@@ -1,0 +1,6 @@
+[submodule "pixeldrain_api_client"]
+	path = pixeldrain_api_client
+	url = https://github.com/Fornaxian/pixeldrain_api_client
+[submodule "util"]
+	path = util
+	url = https://github.com/Fornaxian/util
